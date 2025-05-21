@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: appointment-booking-service
+  rabbitmq:
+     host: rabbitmq
+     port: 5672
+  data:
+    redis:
+      host: redis
+      port: 6379
+  cache:
+    type: redis
+    redis:
+       time-to-live: 3600000
+app:
+  services:
+    scheduling:
+       url: http://scheduling-service:8083/api/v1/scheduling
+    employee:
+       url: http://employee-service:8082/api/v1/employees
+
+# Cấu hình logging (có thể đặt trong logback-spring.xml)
+logging:
+  level:
+    root: INFO
+    vn.vku.booking: DEBUG
+    org.springframework.web: INFO
+    org.springframework.amqp: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %X{traceId:-} %X{spanId:-} [%property{spring.application.name}] - %msg%n"
+
+# Cấu hình Actuator endpoints (ví dụ)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus # Chỉ expose các endpoint cần thiết
+  endpoint:
+    health:
+      show-details: when_authorized
+

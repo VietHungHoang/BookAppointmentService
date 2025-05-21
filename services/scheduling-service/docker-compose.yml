@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-scheduling
+    restart: always
+    environment:
+      POSTGRES_DB: scheduling_db
+      POSTGRES_USER: appointment
+      POSTGRES_PASSWORD: hunghv
+    ports:
+      - "5433:5432"
+
+  scheduling-service:
+    build: .
+    container_name: scheduling-service
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/scheduling_db
+      SPRING_DATASOURCE_USERNAME: appointment
+      SPRING_DATASOURCE_PASSWORD: hunghv
+      APP_SERVICES_SCHEDULING_URL: http://scheduling-service:8083/api/v1/schedule
+      APP_SERVICES_EMPLOYEE_URL: http://employee-service:8082/api/v1/employees

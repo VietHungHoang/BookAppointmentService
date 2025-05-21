@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-booking
+    ports:
+      - "5672:5672"
+      - "15672:15672" # web UI
+    restart: always
+
+  redis:
+    image: redis:alpine
+    container_name: redis-booking
+    ports:
+      - "6379:6379"
+    restart: always
+
+  appointment-booking-service:
+    build: .
+    container_name: appointment-booking-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      APP_SERVICES_SCHEDULING_URL: http://scheduling-service:8083/api/v1/scheduling
+      APP_SERVICES_EMPLOYEE_URL: http://employee-service:8082/api/v1/employees

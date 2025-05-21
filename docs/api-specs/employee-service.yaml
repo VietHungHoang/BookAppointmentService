@@ -1,0 +1,32 @@
+paths:
+  /api/v1/employees/{serviceId}/free:
+    get:
+      summary: Get free employees by service ID and time
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: time
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: List of available employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    employeeId:
+                      type: integer
+                      format: int64
+                    name:
+                      type: string

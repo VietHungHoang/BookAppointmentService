@@ -1,0 +1,15 @@
+api-gateway:
+  build: ./api-gateway
+  container_name: api-gateway
+  ports:
+    - "9090:9090"
+  depends_on:
+    - appointment-booking-service
+    - employee-service
+    - scheduling-service
+    - notification-service
+  environment:
+    SPRING_CLOUD_GATEWAY_ROUTES_0_URI: http://appointment-booking-service:8081
+    SPRING_CLOUD_GATEWAY_ROUTES_1_URI: http://employee-service:8082
+    SPRING_CLOUD_GATEWAY_ROUTES_2_URI: http://scheduling-service:8083
+    SPRING_CLOUD_GATEWAY_ROUTES_3_URI: http://notification-service:8084

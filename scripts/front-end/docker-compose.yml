@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    image: node:20 # Sử dụng image Node.js phiên bản 20 (phù hợp với các dự án Vite hiện đại)
+    container_name: scheduling_app
+    working_dir: /app
+    volumes:
+      - .:/app # Map thư mục hiện tại trên host (chứa code) vào /app trong container
+      - /app/node_modules # Đảm bảo node_modules không bị ghi đè bởi host
+    ports:
+      - "3000:8080" # Map cổng 8080 của host với cổng 8080 của container
+    command: >
+      sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development # Đặt môi trường là development để Vite chạy dev server
+    tty: true # Giữ container chạy và cho phép tương tác

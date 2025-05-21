@@ -1,0 +1,64 @@
+paths:
+  /slots/book:
+    post:
+      summary: Book an appointment slot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customerId:
+                  type: integer
+                  format: int64
+                serviceId:
+                  type: integer
+                  format: int64
+                employeeId:
+                  type: integer
+                  format: int64
+                time:
+                  type: string
+                  format: date-time
+                notes:
+                  type: string
+              required:
+                - customerId
+                - serviceId
+                - employeeId
+                - time
+      responses:
+        '200':
+          description: Successfully booked appointment slot
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appointmentId:
+                    type: integer
+                    format: int64
+                  customerId:
+                    type: integer
+                    format: int64
+                  serviceId:
+                    type: integer
+                    format: int64
+                  employeeId:
+                    type: integer
+                    format: int64
+                  time:
+                    type: string
+                    format: date-time
+                  status:
+                    type: string
+                    description: Appointment status (e.g., CONFIRMED, CANCELLED)
+                  notes:
+                    type: string
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time

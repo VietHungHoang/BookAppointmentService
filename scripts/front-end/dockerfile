@@ -1,0 +1,29 @@
+# Sử dụng image Node.js phiên bản LTS làm base image
+FROM node:18-alpine
+
+# Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# Copy các file cấu hình dự án
+COPY package*.json ./
+COPY bun.lockb ./
+COPY tsconfig*.json ./
+COPY vite.config.ts ./
+COPY postcss.config.js ./
+COPY tailwind.config.ts ./
+COPY eslint.config.js ./
+
+# Cài đặt các dependencies
+RUN npm install
+
+# Copy toàn bộ source code
+COPY . .
+
+# Build ứng dụng
+RUN npm run build
+
+# Expose port 3000 (hoặc port mà ứng dụng của bạn chạy)
+EXPOSE 3000
+
+# Khởi chạy ứng dụng
+CMD ["npm", "run", "dev"]

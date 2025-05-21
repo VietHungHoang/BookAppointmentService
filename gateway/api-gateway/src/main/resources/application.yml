@@ -1,0 +1,45 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        # Route cho Appointment Service
+        - id: appointment-service-route
+          uri: http://appointment-booking-service:8081
+          predicates:
+            - Path=/api/appointment/**
+          filters:
+            - RewritePath=/api/appointment/(?<segment>.*), /api/v1/appointments/${segment}
+
+        # Route cho Employee Service
+        - id: employee-service-route
+          uri: http://employee-service:8082
+          predicates:
+            - Path=/api/employees/**
+          filters:
+            - RewritePath=/api/employees/(?<segment>.*), /api/v1/employees/${segment}
+
+        # Route cho Scheduling Service
+        - id: scheduling-service-route
+          uri: http://scheduling-service:8083
+          predicates:
+            - Path=/api/scheduling/**
+          filters:
+            - RewritePath=/api/scheduling/(?<segment>.*), /api/v1/scheduling/${segment}
+
+        # Route cho Notification Service
+        - id: notification-service-route
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - RewritePath=/api/notifications/(?<segment>.*), /$\{segment}
+            
