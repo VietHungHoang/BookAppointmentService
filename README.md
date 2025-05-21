@@ -4,8 +4,6 @@
 
 Đây là một hệ thống **Đặt lịch hẹn trực tuyến** được xây dựng theo kiến trúc **Microservices**. Các dịch vụ trong hệ thống giao tiếp với nhau thông qua **REST API** và được điều phối bởi một **API Gateway**.
 
---
-
 ## 🧾 Use Case: Đặt lịch hẹn trực tuyến
 ### 🎯 Mục tiêu:
 Người dùng có thể đặt trước lịch hẹn cho một dịch vụ nào đó.Sau khi người dùng chọn một loại dịch vụ và khung thời gian đi kèm thì hệ thống sẽ kiểm tra các nhân viên / chuyên viên có sẵn để cung cấp dịch vụ, lưu thông tin lịch hẹn, gửi email xác nhận.
