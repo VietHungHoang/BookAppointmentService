@@ -76,26 +76,22 @@ mid-project-422482494/
 
 - **Spring Boot** Cho các service backend
 - **React, TypeScript, Tailwind CSS** cho frontend
-- **React, TypeScript, Tailwind CSS** cho frontend
 - **MySQL, Redis** cho lưu trữ dữ liệu
 - **Pessimistic Lock** cho xử lý xung đột dữ liệu
 - **RabbitMQ** cho message broker (hệ thống trung gian gửi nhận tin nhắn)
-- **Docker** và **Docker Compose** để triển khai toàn bộ hệ thống
+- **Docker** để triển khai toàn bộ hệ thống
 - **SMTP** cho gửi email thông báo.
 
-## ⚙️ Hướng dẫn cài đặt hệ thống
-### 1. Yêu cầu:
+## ⚙️ Hướng dẫn cài đặt hệ thống với Docker
 
-- Cài đặt **Docker** và **Docker Compose**
-
-### 2. Clone source code:
+### 1. Clone source code
 
    ```bash
    git clone https://github.com/VietHungHoang/BookAppointmentService.git
    cd BookAppointmentService
    ```
 
-2. **Run with Docker Compose**
+### 2. Run with Docker Compose
 
    ```bash
    docker-compose up --build
