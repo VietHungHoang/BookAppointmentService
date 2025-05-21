@@ -56,8 +56,6 @@ mid-project-422482494/
 └── gateway/                        # API Gateway
     ├── Dockerfile
     └── src/
-
-
 ```
 
 ---
@@ -93,8 +91,8 @@ mid-project-422482494/
 ### 2. Clone source code:
 
    ```bash
-   git clone https://github.com/jnp2018/mid-project-422482494.git
-   cd mid-project-422482494
+   git clone https://github.com/VietHungHoang/BookAppointmentService.git
+   cd BookAppointmentService
    ```
 
 2. **Run with Docker Compose**
